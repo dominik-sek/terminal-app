@@ -1,10 +1,14 @@
 import React from 'react'
+import TerminalWindow from './components/terminal-window/terminal-window';
+import { TerminalProvider } from './store/context';
+
 function App() {
   return (
-    <div className="App">
-        <h1 className="bg-orange-200 font-bold p-4">Vite React Tailwind Eslint Prettier</h1>
+    <div className="h-screen  flex justify-center items-center">
+        <TerminalProvider>
+            <TerminalWindow />
+        </TerminalProvider>
     </div>
-  )
+  );
 }
-
-export default App
+export default App;
