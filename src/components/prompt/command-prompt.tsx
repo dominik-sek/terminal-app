@@ -4,17 +4,20 @@ import useTerminal from '../../store/context';
 
 export const CommandPrompt = () => {
 	const { state } = useTerminal();
+	//date in the format of: Wed Jun 16 15:49:00 PDT 2021
+	const entryDate = localStorage.getItem('entryDate');
+
 	return (
 		<div
 			className={
 				'h-full overflow-auto m-2 text-white font-monaco text-sm flex flex-col'
 			}>
-			Last login: Tue Sep 7 17:00:00 on ttys000
+			<span>Last login: {entryDate} on ttys000</span>
 			{state.commands.map((command, index) => {
 				return (
 					<div key={index}>
 						<div className={'text-green-400'}>~$ <span className={'text-white font-bold'}>{command.name}</span> </div>
-						<div>{command.outcome}</div>
+						<code className={'whitespace-pre'}>{command.outcome}</code>
 					</div>
 				)
 			})}

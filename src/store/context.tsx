@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import terminalReducer, { initialState, TerminalState } from './reducer';
 import { ActionTypes, TerminalActions } from './actions';
-import { availableCommands } from '../constants/available-commands';
+import { handleCommandExecution } from '../utils/handleCommandExecution';
 
 const TerminalContext = createContext<{
 	state: TerminalState;
@@ -29,32 +29,19 @@ export const TerminalProvider = ({
 		const commandArray = command.split(' ');
 		const commandName = commandArray[0];
 		const commandArgs = commandArray.slice(1);
-		console.log(commandName, commandArgs)
+
 		if (commandName === '') return;
 		if (commandName === 'clear') {
 			dispatch({ type: ActionTypes.ClearConsole });
 			return;
 		}
-		if (availableCommands.includes(commandName)) {
-			const outcome = handleCommandExecution(commandName, commandArgs);
-			dispatch({
-				type: ActionTypes.AddCommand,
-				payload: { name:command, outcome },
-			});
-		} else {
-			dispatch({
-				type: ActionTypes.AddCommand,
-				payload: { name:command, outcome: 'Command not found' },
-			});
-		}
+
+		const outcome = handleCommandExecution(commandName, commandArgs);
+		dispatch({
+			type: ActionTypes.AddCommand,
+			payload: { name:command, outcome },
+		});
 	};
-	const handleCommandExecution = (command: string, args: string[] | string): string =>{
-		switch (command) {
-			case 'whoami':
-				return "I'm a developer";
-		}
-		return 'Command not found';
-	}
 
 	const value = {
 		state,
