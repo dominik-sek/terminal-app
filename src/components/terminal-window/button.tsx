@@ -5,9 +5,9 @@ interface ButtonProps {
 	type: 'close' | 'minimize' | 'maximize';
 }
 
-export const Button = (props: ButtonProps) =>{
+export const Button = (props: ButtonProps) => {
 	let color;
-	switch(props.type){
+	switch (props.type) {
 		case 'close':
 			color = 'bg-red-600 hover:bg-red-700';
 			break;
@@ -18,10 +18,12 @@ export const Button = (props: ButtonProps) =>{
 			color = 'bg-green-600 hover:bg-green-700';
 			break;
 	}
-	return(
-		<div className={clsx('rounded-full w-4 h-4  flex items-center justify-center', color)}>
-
-		</div>
-	)
-}
+	return (
+		<div
+			className={clsx(
+				'rounded-full w-4 h-4  flex items-center justify-center',
+				color,
+			)}></div>
+	);
+};
 export default Button;

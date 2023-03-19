@@ -1,4 +1,9 @@
-import React, { createContext, HTMLAttributes, useContext, useReducer } from 'react';
+import React, {
+	createContext,
+	HTMLAttributes,
+	useContext,
+	useReducer,
+} from 'react';
 import terminalReducer, { initialState, TerminalState } from './reducer';
 import { ActionTypes, TerminalActions } from './actions';
 const availableCommands = [
@@ -22,19 +27,20 @@ const availableCommands = [
 ];
 
 const TerminalContext = createContext<{
-	state: TerminalState
-	dispatch: React.Dispatch<TerminalActions>
+	state: TerminalState;
+	dispatch: React.Dispatch<TerminalActions>;
 	addCommand: (command: string) => void;
-}> ({
-		state: initialState,
-		dispatch: () => null,
-		addCommand: () => null,
+}>({
+	state: initialState,
+	dispatch: () => null,
+	addCommand: () => null,
 });
 
-type ITerminalProvider = HTMLAttributes<HTMLDivElement>
+type ITerminalProvider = HTMLAttributes<HTMLDivElement>;
 
-
-export const TerminalProvider = ({children}:ITerminalProvider):JSX.Element =>{
+export const TerminalProvider = ({
+	children,
+}: ITerminalProvider): JSX.Element => {
 	const [state, dispatch] = useReducer(terminalReducer, initialState);
 
 	const addCommand = (command: string) => {
@@ -47,28 +53,31 @@ export const TerminalProvider = ({children}:ITerminalProvider):JSX.Element =>{
 		if (availableCommands.includes(commandName)) {
 			dispatch({ type: ActionTypes.AddCommand, payload: command });
 		} else {
-			dispatch({ type: ActionTypes.AddCommand, payload: `${commandName}: command not found` });
+			dispatch({
+				type: ActionTypes.AddCommand,
+				payload: `${commandName}: command not found`,
+			});
 		}
-	}
+	};
 
 	const value = {
 		state,
 		dispatch,
 		addCommand,
-	}
+	};
 
-	return(
+	return (
 		<TerminalContext.Provider value={value}>
 			{children}
 		</TerminalContext.Provider>
-	)
-}
+	);
+};
 
 export const useTerminal = () => {
 	const context = useContext(TerminalContext);
-	if(!context){
+	if (!context) {
 		throw new Error('useTerminal must be used within a TerminalProvider');
 	}
 	return context;
-}
+};
 export default useTerminal;

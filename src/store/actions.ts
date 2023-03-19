@@ -1,14 +1,14 @@
 export enum ActionTypes {
-	AddCommand, ClearConsole
+	AddCommand,
+	ClearConsole,
 }
 
-export interface AddCommand{
+export interface AddCommand {
 	type: ActionTypes.AddCommand;
 	payload: string;
 }
-export interface ClearConsole{
+export interface ClearConsole {
 	type: ActionTypes.ClearConsole;
 }
-
 
 export type TerminalActions = AddCommand | ClearConsole;

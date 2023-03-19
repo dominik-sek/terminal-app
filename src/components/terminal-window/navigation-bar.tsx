@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import Button from './button';
 export const NavigationBar = () => {
-	return(
+	return (
 		<div className={'bg-navbar rounded-t-md w-full h-7 px-2'}>
 			<div className={'h-full flex items-center gap-1'}>
 				<Button type={'close'} />
@@ -9,6 +9,6 @@ export const NavigationBar = () => {
 				<Button type={'maximize'} />
 			</div>
 		</div>
-	)
-}
-export default NavigationBar
+	);
+};
+export default NavigationBar;
