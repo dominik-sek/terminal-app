@@ -4,7 +4,6 @@ import useTerminal from '../../store/context';
 
 export const CommandPrompt = () => {
 	const { state } = useTerminal();
-
 	return (
 		<div
 			className={
@@ -14,8 +13,8 @@ export const CommandPrompt = () => {
 			{state.commands.map((command, index) => {
 				return (
 					<div key={index}>
-						<span className={'text-green-400'}>~$ </span>
-						{command}
+						<div className={'text-green-400'}>~$ <span className={'text-white font-bold'}>{command.name}</span> </div>
+						<div>{command.outcome}</div>
 					</div>
 				)
 			})}

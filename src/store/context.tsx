@@ -11,7 +11,7 @@ import { availableCommands } from '../constants/available-commands';
 const TerminalContext = createContext<{
 	state: TerminalState;
 	dispatch: React.Dispatch<TerminalActions>;
-	addCommand: (command: string, outcome: string) => void;
+	addCommand: (command: string) => void;
 }>({
 	state: initialState,
 	dispatch: () => null,
@@ -39,17 +39,21 @@ export const TerminalProvider = ({
 			const outcome = handleCommandExecution(commandName, commandArgs);
 			dispatch({
 				type: ActionTypes.AddCommand,
-				payload: { command, outcome },
+				payload: { name:command, outcome },
 			});
 		} else {
 			dispatch({
 				type: ActionTypes.AddCommand,
-				payload: { command, outcome: 'Command not found' },
+				payload: { name:command, outcome: 'Command not found' },
 			});
 		}
 	};
 	const handleCommandExecution = (command: string, args: string[] | string): string =>{
-		return "";
+		switch (command) {
+			case 'whoami':
+				return "I'm a developer";
+		}
+		return 'Command not found';
 	}
 
 	const value = {

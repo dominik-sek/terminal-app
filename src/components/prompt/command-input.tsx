@@ -2,12 +2,36 @@ import React from 'react';
 import useTerminal from '../../store/context';
 
 export const CommandInput = () => {
-	const { addCommand } = useTerminal();
+	const { addCommand, state } = useTerminal();
+	let currentIndex = state.commands.length - 1;
+	const min = 0;
+	const max = state.commands.length - 1;
 
 	const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === 'Enter') {
-			addCommand(e.currentTarget.value);
-			e.currentTarget.value = '';
+		switch(e.key){
+			case 'ArrowUp':
+				e.preventDefault();
+				if (currentIndex === -1) return;
+				e.currentTarget.value = state.commands[currentIndex]?.name;
+				currentIndex > min ? currentIndex-- : currentIndex;
+				break;
+
+			case 'ArrowDown':
+				e.preventDefault();
+				if (currentIndex === -1) return;
+				e.currentTarget.value = state.commands[currentIndex]?.name;
+				currentIndex < max ? currentIndex++ : currentIndex;
+				break;
+
+			case 'Tab':
+				e.preventDefault();
+				//TODO: Add tab completion
+				break;
+
+			case 'Enter':
+				addCommand(e.currentTarget.value);
+				e.currentTarget.value = '';
+				break;
 		}
 	};
 
