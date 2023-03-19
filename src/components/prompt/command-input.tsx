@@ -24,6 +24,7 @@ export const CommandInput = () => {
 				onKeyDown={(e) => {
 					handleKeyPress(e);
 				}}
+				autoComplete={'off'}
 				className={'w-full h-8 bg-transparent outline-none'}
 			/>
 		</div>

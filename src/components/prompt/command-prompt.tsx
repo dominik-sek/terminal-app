@@ -12,7 +12,12 @@ export const CommandPrompt = () => {
 			}>
 			Last login: Tue Sep 7 17:00:00 on ttys000
 			{state.commands.map((command, index) => {
-				return <div key={index}>{command}</div>;
+				return (
+					<div key={index}>
+						<span className={'text-green-400'}>~$ </span>
+						{command}
+					</div>
+				)
 			})}
 			<CommandInput />
 		</div>

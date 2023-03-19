@@ -6,30 +6,12 @@ import React, {
 } from 'react';
 import terminalReducer, { initialState, TerminalState } from './reducer';
 import { ActionTypes, TerminalActions } from './actions';
-const availableCommands = [
-	'clear',
-	'help',
-	'ls',
-	'cd',
-	'cat',
-	'mkdir',
-	'rmdir',
-	'rm',
-	'mv',
-	'cp',
-	'touch',
-	'echo',
-	'pwd',
-	'whoami',
-	'date',
-	'history',
-	'exit',
-];
+import { availableCommands } from '../constants/available-commands';
 
 const TerminalContext = createContext<{
 	state: TerminalState;
 	dispatch: React.Dispatch<TerminalActions>;
-	addCommand: (command: string) => void;
+	addCommand: (command: string, outcome: string) => void;
 }>({
 	state: initialState,
 	dispatch: () => null,
@@ -46,19 +28,29 @@ export const TerminalProvider = ({
 	const addCommand = (command: string) => {
 		const commandArray = command.split(' ');
 		const commandName = commandArray[0];
+		const commandArgs = commandArray.slice(1);
+		console.log(commandName, commandArgs)
+		if (commandName === '') return;
 		if (commandName === 'clear') {
 			dispatch({ type: ActionTypes.ClearConsole });
 			return;
 		}
 		if (availableCommands.includes(commandName)) {
-			dispatch({ type: ActionTypes.AddCommand, payload: command });
+			const outcome = handleCommandExecution(commandName, commandArgs);
+			dispatch({
+				type: ActionTypes.AddCommand,
+				payload: { command, outcome },
+			});
 		} else {
 			dispatch({
 				type: ActionTypes.AddCommand,
-				payload: `${commandName}: command not found`,
+				payload: { command, outcome: 'Command not found' },
 			});
 		}
 	};
+	const handleCommandExecution = (command: string, args: string[] | string): string =>{
+		return "";
+	}
 
 	const value = {
 		state,
@@ -80,4 +72,5 @@ export const useTerminal = () => {
 	}
 	return context;
 };
+
 export default useTerminal;

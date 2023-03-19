@@ -1,3 +1,5 @@
+import { Command } from './reducer';
+
 export enum ActionTypes {
 	AddCommand,
 	ClearConsole,
@@ -5,10 +7,11 @@ export enum ActionTypes {
 
 export interface AddCommand {
 	type: ActionTypes.AddCommand;
-	payload: string;
+	payload: Command;
 }
 export interface ClearConsole {
 	type: ActionTypes.ClearConsole;
 }
+
 
 export type TerminalActions = AddCommand | ClearConsole;

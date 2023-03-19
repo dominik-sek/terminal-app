@@ -14,7 +14,9 @@ module.exports = {
       },
       fontFamily: {
         monaco: ["monaco", "monospace"],
-
+      },
+      backgroundImage:{
+        "mountains": "url('./src/assets/mountains.jpg')",
       }
     },
   },

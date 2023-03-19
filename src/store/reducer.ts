@@ -1,10 +1,16 @@
 import { ActionTypes, TerminalActions } from './actions';
 
+export interface Command {
+	command: string;
+	outcome: string;
+}
 export interface TerminalState {
-	commands: string[];
+	commands: Command[];
+	outcome: string;
 }
 export const initialState: TerminalState = {
-	commands: [],
+	commands: [{} as Command],
+	outcome: '',
 };
 
 export const terminalReducer = (
@@ -20,7 +26,7 @@ export const terminalReducer = (
 		case ActionTypes.ClearConsole:
 			return {
 				...state,
-				commands: [],
+				commands: [{} as Command],
 			};
 		default:
 			return state;
