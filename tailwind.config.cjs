@@ -16,7 +16,7 @@ module.exports = {
         monaco: ["monaco", "monospace"],
       },
       backgroundImage:{
-        "mountains": "url('./src/assets/mountains.webp')",
+        "mountains": "url('/mountains.webp')",
       }
     },
   },
