@@ -10,13 +10,14 @@ export const CommandPrompt = () => {
 	return (
 		<div
 			className={
-				'h-full overflow-auto m-2 text-white font-monaco text-sm flex flex-col'
+				'h-full overflow-auto scrollbar-thin scrollbar-thumb-slate scrollbar-track-gray-600/30 ' +
+				' m-2 text-white font-monaco text-sm flex flex-col scrollbar-rounded-lg'
 			}>
 			<span>Last login: {entryDate} on ttys000</span>
 			{state.commands.map((command, index) => {
 				return (
 					<div key={index}>
-						<div className={'text-green-400'}>~$ <span className={'text-white font-bold'}>{command.name}</span> </div>
+						<div className={'text-green-400 whitespace-nowrap'}>~$ <span className={'text-white font-bold '}>{command.name}</span> </div>
 						<code className={'whitespace-pre'}>{command.outcome}</code>
 					</div>
 				)

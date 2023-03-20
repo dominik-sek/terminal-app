@@ -5,9 +5,8 @@ import commands from '../../utils/command-config';
 
 export const CommandInput = () => {
 	const availableCommands = Object.keys(commands);
-
 	const { addCommand, state } = useTerminal();
-	const { suggestion, getSuggestion, reset } = useSuggestion(availableCommands);
+	const { suggestion, getSuggestion, reset, fullCommand } = useSuggestion(availableCommands);
 
 	let currentIndex = state.commands.length - 1;
 	const min = 0;
@@ -30,7 +29,7 @@ export const CommandInput = () => {
 				break;
 			case 'Enter':
 				if (suggestion) {
-					e.currentTarget.value = suggestion;
+					e.currentTarget.value = fullCommand;
 				}
 				addCommand(e.currentTarget.value.trim());
 				e.currentTarget.value = '';
@@ -39,7 +38,7 @@ export const CommandInput = () => {
 			case 'Tab':
 				e.preventDefault();
 				if (suggestion) {
-					e.currentTarget.value = suggestion;
+					e.currentTarget.value = fullCommand;
 				}
 				break;
 
@@ -65,9 +64,15 @@ export const CommandInput = () => {
 					}}
 					autoComplete={'off'}
 					className={'w-full h-8 bg-transparent outline-none z-10'}
+
 				/>
 				{suggestion && (
-					<input type={'text'} disabled value={suggestion} className={'absolute top-0 left-0 w-full h-8 bg-transparent outline-none text-white -z-10'} />
+					<input type={'text'} disabled
+						   value={suggestion}
+						   className={'absolute top-0 left-0 w-full h-8 bg-transparent outline-none text-white -z-10'}
+						   style={{ paddingLeft: suggestion ? `${fullCommand.length-suggestion.length}ch` : '0' }}
+
+					/>
 				)}
 			</div>
 		</div>

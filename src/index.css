@@ -3,5 +3,7 @@
 @tailwind utilities;
 
 html, body{
-    @apply text-gray-900 w-screen h-screen;
+    @apply text-gray-900 w-screen h-screen
 }
+
+

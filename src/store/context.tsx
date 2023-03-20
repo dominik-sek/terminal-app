@@ -26,6 +26,8 @@ export const TerminalProvider = ({
 	const [state, dispatch] = useReducer(terminalReducer, initialState);
 
 	const addCommand = (command: string) => {
+
+		command = command.toLowerCase();
 		const commandArray = command.split(' ');
 		const commandName = commandArray[0];
 		const commandArgs = commandArray.slice(1);
