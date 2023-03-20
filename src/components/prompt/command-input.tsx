@@ -69,7 +69,7 @@ export const CommandInput = () => {
 				{suggestion && (
 					<input type={'text'} disabled
 						   value={suggestion}
-						   className={'absolute top-0 left-0 w-full h-8 bg-transparent outline-none text-white -z-10'}
+						   className={'absolute top-0 left-0 w-full h-8 bg-transparent outline-none text-white/30 -z-10'}
 						   style={{ paddingLeft: suggestion ? `${fullCommand.length-suggestion.length}ch` : '0' }}
 
 					/>
