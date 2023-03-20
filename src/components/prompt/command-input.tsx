@@ -1,10 +1,13 @@
 import React from 'react';
 import useTerminal from '../../store/context';
 import { useSuggestion } from '../../hooks/useSuggestion';
+import commands from '../../utils/command-config';
 
 export const CommandInput = () => {
+	const availableCommands = Object.keys(commands);
+
 	const { addCommand, state } = useTerminal();
-	const { suggestion, getSuggestion, reset } = useSuggestion();
+	const { suggestion, getSuggestion, reset } = useSuggestion(availableCommands);
 
 	let currentIndex = state.commands.length - 1;
 	const min = 0;

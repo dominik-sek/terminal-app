@@ -22,6 +22,7 @@ export const commands: CommandConfig = {
 	help: () => listAllCommands(),
 	rm: (args) => remove(args),
 	hello: () => 'Hello World!',
+	clear: () => '',
 }
 
 export default commands;

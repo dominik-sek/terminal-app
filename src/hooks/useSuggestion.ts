@@ -1,17 +1,16 @@
 import { useState } from 'react';
-import commands from '../utils/command-config';
 
-export const useSuggestion = () =>{
-	const availableCommands = Object.keys(commands);
+export const useSuggestion = (suggestionArray: Array<string>) =>{
+
 	const [suggestion, setSuggestion] = useState<string>('');
 
 	const getSuggestion = (input:string) => {
-		const matchingCommands = availableCommands.filter(command => {
-			return command.startsWith(input);
+		const matching = suggestionArray.filter(item => {
+			return item.startsWith(input);
 		});
 
-		if (matchingCommands.length === 1) {
-			setSuggestion(matchingCommands[0]);
+		if (matching.length === 1) {
+			setSuggestion(matching[0]);
 		} else {
 			setSuggestion('');
 		}
