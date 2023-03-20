@@ -29,7 +29,7 @@ export const CommandInput = () => {
 				break;
 
 			case 'Enter':
-				addCommand(e.currentTarget.value);
+				addCommand(e.currentTarget.value.trim());
 				e.currentTarget.value = '';
 				break;
 		}

@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import terminalReducer, { initialState, TerminalState } from './reducer';
 import { ActionTypes, TerminalActions } from './actions';
-import { handleCommandExecution } from '../utils/handleCommandExecution';
+import { handleCommandExecution } from '../utils/handle-command-execution';
 
 const TerminalContext = createContext<{
 	state: TerminalState;
